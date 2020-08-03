@@ -1,0 +1,24 @@
+{
+  "name": "seek",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cpu-stat": "^2.0.1",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "moment": "^2.27.0",
+    "moment-duration-format": "^2.3.2",
+    "mongoose": "^5.9.26",
+    "ms": "^2.1.2",
+    "os": "^0.1.1",
+    "seedrandom": "^3.0.5",
+    "sort-array": "^4.1.1",
+    "ytdl-core": "^3.2.0"
+  }
+}
