@@ -9,7 +9,7 @@ module.exports = {
         client.prefixes[message.guild.id] = {
             prefixes: args[0]
         };
-        fs.writeFile("./prefixes.json", JSON.stringify(client.prefixes, null,4),err=>{
+        fs.writeFile("./prefixes.json", JSON.stringify(client.prefixes,null,4),err=>{
             if(err) throw err;
         })
     }
