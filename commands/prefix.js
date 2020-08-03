@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs')
 module.exports = {
     name: 'prefix',
-    description: 'Sets the bots prefix on your server',
+    description: 'Sets the prefix on this server',
     category: 'setup',
     execute(client, message, args) {
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply('Only Administrators can use this command!');

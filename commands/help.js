@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-require('fs');
 module.exports = {
     name: 'help',
     aliases: ['h'],
@@ -22,7 +21,7 @@ module.exports = {
                     name = name[0].toUpperCase() + name.slice(1)
                     helpembed.setTitle(`${name} Help`);
                     category.map(command => {
-                    helpembed.addField(`${command.name}`, `${command.description}`)
+                    helpembed.addField(`\`${client.prefixes[message.guild.id].prefixes}${command.name}\``, `${command.description}`)
                 })
                 }
             }
