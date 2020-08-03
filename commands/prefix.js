@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const fs = require('fs')
 module.exports = {
     name: 'prefix',
     description: 'Sets the bots prefix on your server',
@@ -12,5 +13,6 @@ module.exports = {
         fs.writeFile("./prefixes.json", JSON.stringify(client.prefixes,null,4),err=>{
             if(err) throw err;
         })
+        message.channel.send(`Prefix changed to \`${args[0]}\``)
     }
     }
