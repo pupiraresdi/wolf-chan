@@ -25,16 +25,19 @@ for (const file of commandFiles) {
 	}
 }
 const defprefix=process.env.PREFIX
+let prefix=defprefix
 client.on('message', message => {
-	if(!client.prefixes[message.guild.id]){
-		client.prefixes[message.guild.id] = {
-			prefixes: defprefix
-		};
-		fs.writeFile("./prefixes.json", JSON.stringify(client.prefixes, null,4),err=>{
-			if(err) throw err;
-		})
+	if(message.guild.id) {
+		if (!client.prefixes[message.guild.id]) {
+			client.prefixes[message.guild.id] = {
+				prefixes: defprefix
+			};
+			fs.writeFile("./prefixes.json", JSON.stringify(client.prefixes, null, 4), err => {
+				if (err) throw err;
+			})
+		}
+		prefix = client.prefixes[message.guild.id].prefixes;
 	}
-	let prefix=client.prefixes[message.guild.id].prefixes;
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);

@@ -28,6 +28,7 @@ module.exports = {
             )
             message.channel.send(helpembed);
         }else {
+            //seek is noob
             let helpembed = new Discord.MessageEmbed()
                 .setColor('fd8061')
                 .setFooter('Made by Meliodaf#1900',`${client.users.cache.get('468388958599118848').avatarURL({
