@@ -2,7 +2,9 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'grole',
     description: 'Bruh command',
+    usage: 'server',
     category: 'general',
+
     async execute(client, message, args) {
         if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply('You have no permission');
         let rMember = message.guild.member(message.mentions.users.first()) || message.guilds.member.get(args[0]);

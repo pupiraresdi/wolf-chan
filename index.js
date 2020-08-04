@@ -7,7 +7,7 @@ client.categories = new Discord.Collection();
 client.prefixes=require('./prefixes.json');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 client.once('ready', async () => {
-	await client.user.setActivity(`Seek's pp`, { type: 'STREAMING' , url: 'https://www.twitch.tv/monstercat'});
+	await client.user.setActivity(`/help`, { type: 'STREAMING' , url: 'https://www.twitch.tv/monstercat'});
 	console.log('Ready!');
 });
 const token=process.env.CLIENT_TOKEN
@@ -27,7 +27,7 @@ for (const file of commandFiles) {
 const defprefix=process.env.PREFIX
 let prefix=defprefix
 client.on('message', message => {
-	if(message.guild.id) {
+	if(message.guild) {
 		if (!client.prefixes[message.guild.id]) {
 			client.prefixes[message.guild.id] = {
 				prefixes: defprefix
@@ -38,13 +38,25 @@ client.on('message', message => {
 		}
 		prefix = client.prefixes[message.guild.id].prefixes;
 	}
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (!message.content.startsWith(prefix) || message.author.bot) {
+		if(message.mentions.users.first()===client.user ) {
+			message.channel.send(`My prefix here is \`${prefix}\``)
+		}
+		return;
+	}
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 	client.categories.map((category, name) => {
 		const command = category.get(commandName) || category.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-		if (!command) return;
+		if (!command) {
+			return;
+		}
+		const usage = command.usage;
+		if(usage==='server') {
+			if(message.channel.type ==='dm')
+				return message.reply('Sorry, you can only use that command in a server')
+		}
 		try {
 			command.execute(client, message, args);
 		} catch (error) {

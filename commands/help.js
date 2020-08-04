@@ -2,12 +2,18 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'help',
     aliases: ['h'],
+    usage:'global',
     category: 'general',
     description: 'Help Command',
+
     execute(client, message, args) {
         if(args[0]) {
             const command = client.categories.get(args[0]);
             if (!command) return;
+            let prefix=process.env.PREFIX
+            if(message.guild) {
+                prefix=client.prefixes[message.guild.id].prefixes;
+            }
             let helpembed = new Discord.MessageEmbed()
                 .setColor('fd8061')
                 .setFooter('Made by Meliodaf#1900',`${client.users.cache.get('468388958599118848').avatarURL({
@@ -21,7 +27,7 @@ module.exports = {
                     name = name[0].toUpperCase() + name.slice(1)
                     helpembed.setTitle(`${name} Help`);
                     category.map(command => {
-                    helpembed.addField(`\`${client.prefixes[message.guild.id].prefixes}${command.name}\``, `${command.description}`)
+                    helpembed.addField(`\`${prefix}${command.name}\``, `${command.description}`)
                 })
                 }
             }

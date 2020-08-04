@@ -8,7 +8,9 @@ let victor = -1;
 module.exports = {
 	name: 'rps',
 	description: 'A Classic Rock Paper Scissors Game',
+    usage: 'global',
     category: 'minigames',
+
     execute: async function (client, message, args) {
         let hentai = message.mentions.users.first()||null;
 	    let winner = message.author
