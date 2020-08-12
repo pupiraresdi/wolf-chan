@@ -8,7 +8,7 @@ let victor = -1;
 module.exports = {
 	name: 'rps',
 	description: 'A Classic Rock Paper Scissors Game',
-    usage: 'global',
+    usage: 'server',
     category: 'minigames',
 
     execute: async function (client, message, args) {
@@ -16,11 +16,9 @@ module.exports = {
 	    let winner = message.author
         if (args[0] === 'challenge') {
             const Channel = client.channels.cache.get(`${message.channel.id}`);
-            if(message.author === hentai)
-                return message.channel.send('Sorry, you cannot challenge yourself')
-            if (message.guild === null)
-                return message.reply('you can  use this command in a server!')
-            if (!message.mentions.onlyusers.first())
+            // if(message.author === hentai)
+            //     return message.channel.send('Sorry, you cannot challenge yourself')
+            if (!message.mentions.users.first())
                 return message.reply('you need to mention a user for that!');
             const embed = new Discord.MessageEmbed()
             embed.setTitle(`${hentai.tag} do you accept?`)
@@ -36,10 +34,10 @@ module.exports = {
             await sentMessage.react('738405760064684053')
             await sentMessage.react('738405785897271366')
             sentMessage.awaitReactions((reaction, user) => user.id === hentai.id && (reaction.emoji.id === '738405760064684053' || reaction.emoji.id === '738405785897271366'),
-                {max: 1, time: 30000}).then(async collected => {
+                {max: 1, time: 30000}).then(collected => {
                 if (collected.first().emoji.id === '738405760064684053') {
                     embed.setTitle('Challenge Approved - I have sent a dm')
-                    await sentMessage.edit(embed);
+                    sentMessage.edit(embed);
                     setTimeout(function () {
                         let embeds = new Discord.MessageEmbed()
                         embeds.setTitle('Waiting...')
@@ -160,7 +158,7 @@ module.exports = {
 
                 } else {
                     embed.setTitle('Challenge Denied')
-                    await sentMessage.edit(embed);
+                    sentMessage.edit(embed);
                 }
 
             }).catch(() => {
@@ -171,6 +169,7 @@ module.exports = {
                 let list2 = ['DRAW', `${winner.tag} WON`]
                 let ar= new Discord.MessageEmbed
                 ar.setTitle(`${list2[victor]}`)
+                console.log(victor)
                 ar.setDescription('Check the channel for info')
                 ar.setThumbnail(`${client.user.avatarURL({
                     format: 'png',
@@ -186,6 +185,12 @@ module.exports = {
             }
             function oppai() {
                 victor=1;
+                console.log('bug?')
+                console.log(victor)
+                console.log(confirm1)
+                console.log(confirm2)
+                console.log(a)
+                console.log(b)
                 if(a===0) {
                     if(b===1) {
                         winner = hentai;
